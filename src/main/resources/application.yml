@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: agitmaterial-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/agitmaterial-service
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        hbm2ddl:
+          auto: create-drop
+
+server:
+  port: 8080
