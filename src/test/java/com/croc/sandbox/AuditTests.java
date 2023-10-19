@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.springframework.test.util.AssertionErrors.*;
 
 /**
@@ -75,9 +76,7 @@ public class AuditTests {
         entity.setTitle("rollback");
 
         // Сохраняем сущность с помощью метода, подлежащего аудированию
-        var savedEntity = tagService.saveWithException(entity);
-        // Проверяем, что транзакция откатилась, сущность не сохранилась
-        assertNull("entity", savedEntity);
+        assertThrows(Throwable.class, () -> tagService.saveWithException(entity));
 
         // Проверяем, что сущность аудита не создавалась.
         assertTrue("Audit entity", auditRepository.findAll().size() == 0);

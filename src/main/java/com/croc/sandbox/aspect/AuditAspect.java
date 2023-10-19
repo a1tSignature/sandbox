@@ -26,7 +26,7 @@ public class AuditAspect {
     public void auditPointcut() {}
 
     @Around("auditPointcut()")
-    public Object auditAroundAdvice(ProceedingJoinPoint joinPoint) {
+    public Object auditAroundAdvice(ProceedingJoinPoint joinPoint) throws Throwable {
         Object originalObject = joinPoint.getArgs()[0];
         Object targetObject;
 
@@ -38,7 +38,7 @@ public class AuditAspect {
         } catch (Throwable e) {
             // Имитируем обработку ошибки
             log.error("Произошла ошибка при выполнении аудируемого метода. Сущность аудита не создана");
-            return null;
+            throw e;
         }
 
         return targetObject;
