@@ -34,7 +34,7 @@ public class NewEventListener {
 
     @TransactionalEventListener
     public void handleSynchronizedApplicationEvent(AsyncApplicationFailureEvent event) throws InterruptedException {
-        log.info("Листенер получил событие отката транзакции");
+        log.info("Листенер получил событие транзакции");
         var newTag = new TagEntity(event.message() + " new event");
         tagRepository.save(newTag);
     }

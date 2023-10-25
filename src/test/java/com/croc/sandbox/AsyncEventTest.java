@@ -35,7 +35,6 @@ public class AsyncEventTest {
     @Test
     @Transactional
     @DisplayName ("Проверка на публикацию асинхронных событий")
-    // Сделать ивент по завершению транзакции
     public void eventTest() throws InterruptedException {
         String eventMessage = "Текст события";
         // Запускаем публикацию события
@@ -46,6 +45,7 @@ public class AsyncEventTest {
         Thread.sleep(10000);
         // Снова проводим поиск
         assertNotNull("Проверка на не null", tagRepository.findByTitle("Текст события new event"));
+        assertNull("Проверка на null", tagRepository.findByTitle("Текст события"));
 
     }
 
